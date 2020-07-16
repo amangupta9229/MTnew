@@ -35,7 +35,7 @@ app.use(require("express-session")({
     secret: "Meeting Tracker is the useful",
     resave: false,
     saveUninitialized : false,
-    store: new MongoStore({mongooseConnection=mongoose.connection})
+    store: new MongoStore({mongooseConnection:mongoose.connection})
 }));
 
 
