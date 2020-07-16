@@ -12,10 +12,7 @@ expressSanitizer = require("express-sanitizer");
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
  
-app.use(session({
-    secret: 'foo',
-    store: new MongoStore(options)
-}));
+
 
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
@@ -37,7 +34,8 @@ app.use(methodOverride("_method"));
 app.use(require("express-session")({
     secret: "Meeting Tracker is the useful",
     resave: false,
-    saveUninitialized : false
+    saveUninitialized : false,
+    store: new MongoStore({mongooseConnection=mongoose.connection})
 }));
 
 
