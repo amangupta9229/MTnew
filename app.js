@@ -15,7 +15,8 @@ mongoose.set('useCreateIndex', true);
 mongoose.set('useUnifiedTopology', true);
 
 //APP CONFIG
-mongoose.connect("mongodb://localhost:27017/MoMdb", { useNewUrlParser: true });
+//mongoose.connect("mongodb://localhost:27017/MoMdb", { useNewUrlParser: true });
+mongoose.connect("mongodb+srv://amangupta9229:powergrid2@cluster0-5bycj.mongodb.net/<dbname>?retryWrites=true&w=majority", { useNewUrlParser: true });
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
