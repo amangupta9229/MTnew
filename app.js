@@ -9,10 +9,20 @@ User = require("./models/user"),
 methodOverride = require("method-override"),
 expressSanitizer = require("express-sanitizer");
 
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
+ 
+app.use(session({
+    secret: 'foo',
+    store: new MongoStore(options)
+}));
+
 mongoose.set('useNewUrlParser', true);
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 mongoose.set('useUnifiedTopology', true);
+
+
 
 //APP CONFIG
 //mongoose.connect("mongodb://localhost:27017/MoMdb", { useNewUrlParser: true });
