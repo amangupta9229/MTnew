@@ -308,6 +308,6 @@ function isLoggedIn(req,res,next){
 }
 
 
-app.listen(3001, function(){
+app.listen( process.env.PORT || 3001, function(){
     console.log("Server is running");
 })
