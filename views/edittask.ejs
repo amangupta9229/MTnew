@@ -1,0 +1,90 @@
+<html>
+    <head>
+        <title>Meeting Tracker</title>
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+        <link rel="stylesheet" type="text/css" href="/stylesheets/app.css">
+        <script src="https://kit.fontawesome.com/532e54d05a.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    </head>
+    <body>
+        <div class="d-flex bd-highlight  align-items-center" ">
+            <div class="ui fixed inverted menu" id="navbarID">
+                <div class="ui container">
+                    <div class="item p-2 bd-highlight">
+                    <p class="item" id="visionetID">VISIONET</p>
+                    </div>
+                    <div class="header item p-2 bd-highlight" id="titleID"><i class="fas fa-users fa-2x"></i> &nbsp; Meeting Tracker</div>
+                    <a href="/" class="item p-2 bd-highlight">Meetings</a>
+                    <a href="/blogs/new" class="item p-2 bd-highlight">New Meeting</a>
+                    <a href="/tasks" class="item p-2 bd-highlight">Tasks</a>
+                    <a href="/tasks/new" class="item mr-auto p-2 bd-highlight">Add Tasks</a>
+                    <div class="item p-2 bd-highlight" id="userID">
+                    <p class="item "></p><%=currentUser.username%></p>
+                    </div>
+                    <a href="/logout" class="item p-2 bd-highlight" id="logoutID"><i class="fas fa-power-off fa-2x "></i></a>
+                </div>
+            </div>
+            </div>
+<div class="ui main text container segment">
+    <div class="ui huge header">Edit <%= task.title %></div>
+    <form class="ui form" action="/tasks/<%= task._id %>?_method=PUT" method="POST">
+        <div class="field">
+            <label>Task Description</label>
+            <textarea name="task[description]"><%= task.description %></textarea>
+        </div>
+        <div class="field">
+            <label>Assigned To</label>
+            <select class="custom-select" name="task[assignedto]">
+                     <option selected =""><%= task.assignedto %></option>
+                     <option value="Alok Bansal">Alok Bansal</option>
+                      <option value="Amit Khandelwal">Amit Khandelwal</option>
+                      <option value="Gitanjali Singh">Gitanjali Singh</option>
+                      <option value="Jimmy Cherian">Jimmy Cherian</option>
+                      <option value="Kshitij Singhal">Kshitij Singhal</option>
+                      <option value="Miriam Shaju">Miriam Shaju</option>
+                      <option value="Narmada Lakshamanan">Narmada Lakshmanan</option>
+                      <option value="Raju Varda">Raju Varada</option>
+                      <option value="Sundar K">Sundar K</option>
+                      <option value="Tushar Singh">Tushar Singh</option>
+                      <option value="Vishwa K">Vishwa K</option>
+              </select>
+        </div>
+
+
+        <div class="field">
+            <label>Assigned Date</label>
+            <input type="datetime-local" name="task[assigned]" value="<%= task.assigned %>">
+        </div>
+        <div class="field">
+            <label>Deadline</label>
+            <input type="datetime-local" name="task[deadline]" value="<%= task.deadline %>">
+        </div>
+
+
+
+        <div class="field">
+            <label>Priority</label>
+            <!-- <input type="text" name="task[priority]" value="<%= task.priority %>"> -->
+                <select class="custom-select" name="task[priority]">
+                  <option selected ="<%= task.priority %>"><%= task.priority %></option>
+                  <option value="Critical">Critical</option>
+                  <option value="High">High</option>
+                  <option value="Medium">Medium</option>
+                  <option value="Low">Low</option>
+                </select>
+        </div>
+        <div class="field">
+            <label>Status</label>
+            <select class="custom-select" name="task[status]">
+                <option selected="" ><%= task.status %></option>
+                <option value="Open">Open</option>
+                <option value="Closed">Closed</option>
+                <option value="Deffered">Deferred</option>
+            </select>
+        </div>
+    
+        <input class="ui violet basic button" type="submit">
+    </form>
+</div>
+</body>
+</html>

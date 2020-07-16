@@ -1,0 +1,252 @@
+<html>
+    <head>
+        <title>Meeting Tracker</title>
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+        <link rel="stylesheet" type="text/css" href="/stylesheets/app.css">
+        <script src="https://kit.fontawesome.com/532e54d05a.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    </head>
+    <body>
+      <div class="d-flex bd-highlight  align-items-center" ">
+        <div class="ui fixed inverted menu" id="navbarID">
+            <div class="ui container">
+                <div class="item p-2 bd-highlight">
+                <p class="item" id="visionetID">VISIONET</p>
+                </div>
+                <div class="header item p-2 bd-highlight" id="titleID"><i class="fas fa-users fa-2x"></i> &nbsp; Meeting Tracker</div>
+                <a href="/" class="item p-2 bd-highlight">Meetings</a>
+                <a href="/blogs/new" class="item p-2 bd-highlight">New Meeting</a>
+                <a href="/tasks" class="item p-2 bd-highlight">Tasks</a>
+                <a href="/tasks/new" class="item mr-auto p-2 bd-highlight">Add Tasks</a>
+                <div class="item p-2 bd-highlight" id="userID">
+                <p class="item "></p><%=currentUser.username%></p>
+                </div>
+                <a href="/logout" class="item p-2 bd-highlight" id="logoutID"><i class="fas fa-power-off fa-2x "></i></a>
+            </div>
+        </div>
+        </div>
+
+
+        <div class="ui main text container segment">
+          <div class="ui huge header">Add Task</div>
+          <form class="ui form" action="/tasks" method="POST">
+              <div class="field">
+                  <label>Task Description</label>
+                  <textarea name="task[description]"></textarea>
+              </div>
+              <div class="field">
+                  <label>Assigned To</label>
+                  <select class="custom-select" name="task[assignedto]">
+                      <option selected ="">Assigned To</option>
+                      <option value="Alok Bansal">Alok Bansal</option>
+                      <option value="Amit Khandelwal">Amit Khandelwal</option>
+                      <option value="Gitanjali Singh">Gitanjali Singh</option>
+                      <option value="Jimmy Cherian">Jimmy Cherian</option>
+                      <option value="Kshitij Singhal">Kshitij Singhal</option>
+                      <option value="Miriam Shaju">Miriam Shaju</option>
+                      <option value="Narmada Lakshamanan">Narmada Lakshmanan</option>
+                      <option value="Raju Varda">Raju Varada</option>
+                      <option value="Sundar K">Sundar K</option>
+                      <option value="Tushar Singh">Tushar Singh</option>
+                      <option value="Vishwa K">Vishwa K</option>
+                    </select>
+
+              <div class="field">
+                  <label>Assigned Date</label>
+                  <input type="datetime-local" name="task[assigned]">
+              </div>
+              <div class="field">
+                  <label>Deadline</label>
+                  <input type="datetime-local" name="task[deadline]" >
+              </div>
+
+
+              <!-- <div class="field"> 
+                <label>Start Time:</label>
+                <input type="datetime-local" name="blog[starttime]">
+            </div>
+          </div>
+          <div class="field"> 
+            <label>End Time</label>
+                <input type="datetime-local" name="blog[endtime]">
+          </div> -->
+
+
+
+
+              <div class="field">
+                  <label>Priority</label>
+                      <select class="custom-select" name="task[priority]">
+                        <option selected ="">Task Priority</option>
+                        <option value="Critical">Critical</option>
+                        <option value="High">High</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Low">Low</option>
+                      </select>
+              </div>
+              <div class="field">
+                  <label>Status</label>
+                  <select class="custom-select" name="task[status]">
+                      <option selected="" >Status</option>
+                      <option value="Open">Open</option>
+                      <option value="Closed">Closed</option>
+                      <option value="Deffered">Deferred</option>
+                  </select>
+              </div>
+          
+              <input class="ui violet basic button" type="submit">
+          </form>
+<!-- 
+        <div class="ui main text container segment">
+            <div class="ui huge header">New Meeting</div>
+            <form class="ui form" action="/tasks" method="POST">
+                <div class="field">
+                    <label>Agenda</label>
+                    <input type="text" name="task[description]" placeholder="title">
+                </div>
+               <div class="field">
+                    <label>Meeting Minutes</label>
+                    <textarea name="task[status]" id="textareaID"></textarea>
+                </div>
+        
+                <input class="ui violet basic button" type="submit">
+            </form>
+        </div> -->
+
+
+
+
+         <!-- <div class="taskDiv" style="width: 100%">
+            <div class="container" style="max-width: 100%">
+
+              <div class="row justify-content-between align-items-stretch">
+              <div class="col-12">
+             <div class="d-flex flex-column justify-content-between ml-4"> 
+              
+                <form class="ui form" action="/tasks" method="POST">
+                <div class="d-flex flex-row bd-highlight justify-content-around bg-light" id="boxTask2">
+                    
+                  <div class="col-sm-2 bg info my-3">
+                    <div class="form-group">
+                      <textarea class="form-control" id="exampleTextarea" name="task[description]" rows="3" spellcheck="false" placeholder="Add Task"></textarea>
+                    </div>
+                  </div>
+
+              
+                <div class="col-sm-2 bg info">
+                    <div class="form-group my-3">
+                      <select class="custom-select" name="task[priority]">
+                        <option selected ="">Task Priority</option>
+                        <option value="Critical">Critical</option>
+                        <option value="High">High</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Low">Low</option>
+                      </select>
+                    </div>
+                </div>
+        
+               <div class="col-sm-2 bg info mt-2">
+                  <div class="input-group date mt-2" id="datetimepicker1" data-target-input="nearest" style="width:220px;">
+                    <input type="text" class="form-control datetimepicker-input datetimepicker" id="dateInput" data-target="#datetimepicker1" name="task[assigned]" placeholder="Assigned Date" />
+                    <span class="input-group-addon" data-target="#datetimepicker1" data-toggle="datetimepicker">
+                          <span class="fa fa-calendar fa-2x m-1"></span>
+                    </span>
+                </div>
+              </div>
+        
+                <div class="col-sm-2 bg info mt-2">
+                  <div class="input-group date mt-2" id="datetimepicker2" data-target-input="nearest" style="width:220px;">
+                    <input type="text" class="form-control datetimepicker-input datetimepicker" id="dateInput" data-target="#datetimepicker1" name="task[deadline]" placeholder="Deadline" />
+                    <span class="input-group-addon" data-target="#datetimepicker2" data-toggle="datetimepicker">
+                          <span class="fa fa-calendar fa-2x m-1"></span>
+                    </span>
+                </div>
+              </div>
+        
+              <div class="col-sm-2 bg info">
+                    <div class="form-group my-3">
+                      <select class="custom-select" name="task[assignedto]">
+                        <option selected ="">Assigned To</option>
+                        <option value="Ross">Ross</option>
+                        <option value="Rachel">Rachel</option>
+                        <option value="Chandler">Chandler</option>
+                        <option value="Joey">Joey</option>
+                        <option value="Pheobe">Pheobe</option>
+                        <option value="Monica">Monica</option>
+                      </select>
+                    </div>
+                </div>
+        
+                <div class="col-sm-2 bg info my-3">
+                    <div class="form-group">
+                      <select class="custom-select" name="task[status]">
+                        <option selected >Status</option>
+                        <option value="Open">Open</option>
+                        <option value="Closed">Closed</option>
+                        <option value="Deffered">Deferred</option>
+                      </select>
+                    </div>
+                </div>
+                <input type="submit">
+                </form>
+              </div>
+ --> 
+
+
+
+<!-- <div class="ui main text container segment">
+    <div class="ui huge header">New Task</div>
+    <form class="ui form" action="/tasks" method="POST">
+        <div class="field">
+            <label>Task</label>
+            <input type="text" name="task[title]" placeholder="title">
+        </div>
+
+       <div class="field">
+            <label>Meeting Minutes</label>
+            <textarea name="task[body]" id="textareaID"></textarea>
+        </div>
+        
+        <input class="ui violet basic button" type="submit">
+    </form>
+</div> -->
+
+<!-- <form>
+    <div class="form-group">
+      <label for="exampleFormControlInput1">Email address</label>
+      <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+    </div>
+    <div class="form-group">
+      <label for="exampleFormControlSelect1">Example select</label>
+      <select class="form-control" id="exampleFormControlSelect1">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="exampleFormControlSelect2">Example multiple select</label>
+      <select multiple class="form-control" id="exampleFormControlSelect2">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>4</option>
+        <option>5</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="exampleFormControlTextarea1">Example textarea</label>
+      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+    </div>
+  </form> -->
+</body>
+</html>

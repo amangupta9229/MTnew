@@ -1,0 +1,52 @@
+<html>
+    <head>
+        <title>Meeting Tracker</title>
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+        <link rel="stylesheet" type="text/css" href="/stylesheets/app.css">
+        <script src="https://kit.fontawesome.com/532e54d05a.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    </head>
+    <body>
+        <div class="d-flex bd-highlight  align-items-center" ">
+            <div class="ui fixed inverted menu" id="navbarID">
+                <div class="ui container">
+                    <div class="item p-2 bd-highlight">
+                    <p class="item" id="visionetID">VISIONET</p>
+                    </div>
+                    <div class="header item p-2 bd-highlight" id="titleID"><i class="fas fa-users fa-2x"></i> &nbsp; Meeting Tracker</div>
+                    <a href="/" class="item p-2 bd-highlight">Meetings</a>
+                    <a href="/blogs/new" class="item p-2 bd-highlight">New Meeting</a>
+                    <a href="/tasks" class="item p-2 bd-highlight">Tasks</a>
+                    <a href="/tasks/new" class="item mr-auto p-2 bd-highlight">Add Tasks</a>
+                    <div class="item p-2 bd-highlight" id="userID">
+                    <p class="item "></p><%=currentUser.username%></p>
+                    </div>
+                    <a href="/logout" class="item p-2 bd-highlight" id="logoutID"><i class="fas fa-power-off fa-2x "></i></a>
+                </div>
+            </div>
+            </div>
+<div class="ui main text container segment">
+    
+    <div class="ui top attached">
+        <div class="item">
+            <!-- <div class="content">
+                 <span><%= task.created.toDateString() %></span>
+            </div> -->
+            <div class="description">
+                 <p><b>Task Description: </b><%- task.description %></p>
+                 <p><b>Assigned To: </b><%- task.assignedto %></p>
+                 <p><b>Assigned Date: </b><%- task.assigned %></p>
+                 <p><b>Deadline:</b> <%- task.deadline %></p>
+                 <p><b>Priority: </b><%- task.priority %></p>
+                 <p><b>Status: </b><%- task.status %></p>
+            </div>
+            <a class="ui orange basic button" href="/tasks/<%= task._id %>/edit">Edit</a>
+            <form id="delete" action="/tasks/<%= task._id %>?_method=DELETE" method="POST">
+                <button class="ui red basic button">Delete</button>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+

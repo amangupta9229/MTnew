@@ -1,0 +1,140 @@
+<html>
+    <head>
+        <title>Meeting Tracker</title>
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+        <link rel="stylesheet" type="text/css" href="/stylesheets/app.css">
+        <script src="https://kit.fontawesome.com/532e54d05a.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/css/select2.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.min.js"></script>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <div class="d-flex bd-highlight  align-items-center" ">
+            <div class="ui fixed inverted menu" id="navbarID">
+                <div class="ui container">
+                    <div class="item p-2 bd-highlight">
+                    <p class="item" id="visionetID">VISIONET</p>
+                    </div>
+                    <div class="header item p-2 bd-highlight" id="titleID"><i class="fas fa-users fa-2x"></i> &nbsp; Meeting Tracker</div>
+                    <a href="/" class="item p-2 bd-highlight">Meetings</a>
+                    <a href="/blogs/new" class="item p-2 bd-highlight">New Meeting</a>
+                    <a href="/tasks" class="item p-2 bd-highlight">Tasks</a>
+                    <a href="/tasks/new" class="item mr-auto p-2 bd-highlight">Add Tasks</a>
+                    <div class="item p-2 bd-highlight" id="userID">
+                    <p class="item "></p><%=currentUser.username%></p>
+                    </div>
+                    <a href="/logout" class="item p-2 bd-highlight" id="logoutID"><i class="fas fa-power-off fa-2x "></i></a>
+                </div>
+            </div>
+            </div>
+
+
+        <div class="ui main text container segment">
+            <div class="ui huge header">Edit</div>
+            <form class="ui form" action="/blogs/<%= blog._id %>?_method=PUT" method="POST">
+                <div class="field">
+                    <label>Agenda</label>
+                    <input type="text" name="blog[title]" placeholder="title" value="<%= blog.title %>">
+                </div>
+
+
+                <div class="field">
+                    <label>Location</label>
+                    <select class="custom-select" name="blog[location]"  >
+                        <option selected="<%= blog.location %>" ></option>
+                        <option value="Conference Room A">Conference Room A</option>
+                        <option value="Conference Room B">Conference Room B</option>
+                        <option value="Conference Room C">Conference Room C</option>
+                        <option value="Conference Room D">Conference Room D</option>
+                        <option value="Conference Room E">Conference Room E</option>
+                        <option value="Conference Room F">Conference Room F</option>
+                    </select>
+                </div>
+          
+                        <!-- <div class="field">
+                          <label>Attendees</label>
+                            <select class="mul-select" name=blog[attendees] multiple="true" >
+                                <option selected="" ><%= blog.attendees %></option>
+                                <option value="Alok Bansal">Alok Bansal</option>
+                                <option value="Amit Khandelwal">Amit Khandelwal</option>
+                                <option value="Gitanjali Singh">Gitanjali Singh</option>
+                                <option value="Jimmy Cherian">Jimmy Cherian</option>
+                                <option value="Kshitij Singhal">Kshitij Singhal</option>
+                                <option value="Miriam Shaju">Miriam Shaju</option>
+                                <option value="Narmada Lakshamanan">Narmada Lakshmanan</option>
+                                <option value="Raju Varda">Raju Varada</option>
+                                <option value="Sundar K">Sundar K</option>
+                                <option value="Tushar Singh">Tushar Singh</option>
+                                <option value="Vishwa K">Vishwa K</option>
+                                </select>
+                            </select>
+                        </div> 
+          
+                        <div class="field">
+                          <label>Meeting Category:</label>
+                            <select class="mul-select2" name=blog[meetingcategory] multiple="true" >
+                                <option selected="<%= blog.meetingcategory %>" >Meeting Category</option>
+                                <option value="Daily Strategic Hiring">Daily Strategic Hiring</option>
+                                <option value="Project Blue">Project Blue</option>
+                                <option value="BFSI IT GTM/Sales Cadence">BFSI IT GTM/Sales Cadence</option>
+                                <option value="MD Staff Meeting">MD Staff Meeting</option>
+                                <option value="Alok's Meetings">Alok's Meetings</option>
+                                <option value="Hiring Meeting">Hiring Meeting</option>
+                                <option value="Innovation Lab">Innovation Lab></option>
+                                <option value="KRA Meeting">KRA Meeting</option>
+                                <option value="Client Profitability">Client Profitability</option>
+                                <option value="Revenue and Cost Forecast">Revenue and Cost Forecast</option>
+                                <option value="Transitions and Onboarding">Transitions and Onboarding</option>
+                                <option value="BFS IT Sales">BFS IT Sales</option>
+                                <option value="VSPL Staff">VSPL Staff</option>
+                                </select>
+                            </select>
+                        </div>  -->
+               <div class="field">
+                    <label>Meeting Minutes</label>
+                    <textarea name="blog[body]" id="textareaID" value=""><%= blog.body %></textarea>
+                </div>
+        
+                <input class="ui violet basic button" type="submit">
+            </form>
+        </div>
+        
+<!-- <div class="ui main text container segment">
+    <div class="ui huge header">Edit <%= blog.title %></div>
+    <form class="ui form" action="/blogs/<%= blog._id %>?_method=PUT" method="POST">
+        <div class="field">
+            <label>Title</label>
+            <input type="text" name="blog[title]" value="<%= blog.title %>">
+        </div>
+        <div class="field">
+            <label>Blog Content</label>
+            <textarea name="blog[body]"><%= blog.body %></textarea>
+        </div>
+        <input class="ui violet basic button" type="submit">
+    </form>
+</div> -->
+
+<!-- <script>
+    $(document).ready(function(){
+        $(".mul-select").select2({
+                placeholder: "select members", //placeholder
+                tags: true,
+                tokenSeparators: ['/',',',';'," "]
+            });
+        })
+
+        $(document).ready(function(){
+        $(".mul-select2").select2({
+                placeholder: "select meeting category", //placeholder
+                tags: true,
+                tokenSeparators: ['/',',',';'," "]
+            });
+        })
+    </script> -->
+</body>
+</html>
