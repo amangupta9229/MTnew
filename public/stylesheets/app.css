@@ -5,6 +5,9 @@ i.icon {
 .container.main {
     margin-top: 6.0em;
 }
+#filterID {
+  margin-top: 6.0em;
+}
 
  #navbarID{
     height:4em;
@@ -15,8 +18,15 @@ i.icon {
     margin-left: -150;
 }
 
-#logoutID{
-    
+#EmployeeFormID{
+  float: left;
+  margin-left: -20%;
+} 
+
+#archiveID{
+  margin-top: -6.0em;
+  margin-right:-20% ;
+    float: right;
 } 
 #userID{
     font-size: 200%;

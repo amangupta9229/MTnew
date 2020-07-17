@@ -21,19 +21,90 @@
                     <div class="item p-2 bd-highlight" id="userID">
                     <p class="item "></p><%=currentUser.username%></p>
                     </div>
-                    <a href="/logout" class="item p-2 bd-highlight" id="logoutID"><i class="fas fa-power-off fa-2x "></i></a>
+                    <a href="/logout" class="item p-2 bd-highlight" id="logoutID"><i class="fas fa-power-off fa-lg "></i></a>
                 </div>
             </div>
             </div>
 
 
-        
+         <!-------------------------------------------- FILTER ------------------------------------------->
+         <div class="container" id="filterID">
+            <div class="row">
+               
+
+                
+         <div class="col-md-6">
+            <form action="/search/" id="EmployeeFormID" class="form-horizontal" method="POST"  role="form">
+
+                <div class="col-md-12">
+                    <h1>Filter Tasks Archive</h1>
+                    <br>
+                </div>
+                        
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="email" class="col-md-12 control-label">Person Responsible</label>
+                        <div class="col-md-12">
+                            <select class="form-control" name="task[name]">
+                                <option selected =""></option>
+                                <option value="Alok Bansal">Alok Bansal</option>
+                                <option value="Amit Khandelwal">Amit Khandelwal</option>
+                                <option value="Gitanjali Singh">Gitanjali Singh</option>
+                                <option value="Jimmy Cherian">Jimmy Cherian</option>
+                                <option value="Kshitij Singhal">Kshitij Singhal</option>
+                                <option value="Miriam Shaju">Miriam Shaju</option>
+                                <option value="Narmada Lakshamanan">Narmada Lakshmanan</option>
+                                <option value="Raju Varda">Raju Varada</option>
+                                <option value="Sundar K">Sundar K</option>
+                                <option value="Tushar Singh">Tushar Singh</option>
+                                <option value="Vishwa K">Vishwa K</option>
+                              </select></div>
+                    </div>
+                 </div>
+           <div class="col-md-12">
+            <div class="form-group">
+                <label for="email" class="col-md-12 control-label">Priority</label>
+                <div class="col-md-12">
+                    <select class="form-control" name="task[pname]">
+                        <option selected =""></option>
+                        <option value="Critical">Critical</option>
+                        <option value="High">High</option>
+                        <option value="Medium">Medium</option>
+                        <option value="Low">Low</option>
+                      </select></div>
+            </div>
+         </div>
+           <div class="col-md-12">
+              <div class="form-group">
+                  <label for="email" class="col-md-12 control-label">Status</label>
+                  <div class="col-md-12">
+                      <select class="form-control" name="task[sname]">
+                        <option selected =""></option>
+                        <option value="Open">Open</option>
+                        <option value="Closed">Closed</option>
+                        <option value="Deffered">Deferred</option>
+                        </select></div>
+              </div>
+           </div>
+           <div class="col-md-12">
+              <div class="form-group">
+                  <label for="email" class="col-md-12 control-label">&nbsp;</label>
+                 
+                   <div class="col-md-12">
+                      <input type="submit" class="form-control btn btn-primary" name="submit" placeholder="Filter">
+                  </div>
+              </div>
+           </div>
+    </form>
 
 
+    <div class="col-md-6" id="archiveID">
 <div class="ui main text container">
     <div class="ui huge header">Tasks Archive</div>
+    <br>
     <div class="ui top attached segment">
         <div class="ui divided items">
+            <% if(tasks.length>0) { %>
             <% tasks.forEach(function(task){ %>
                 <div class="item">
                     <div class="content">
@@ -59,9 +130,22 @@
                         </div>
                     </div>
                 </div>
-            <% }) %>
+                <%}) } else {%>
+                <h2>No Tasks Found</h2>
+                <%}%>        
         </div>
     </div>
 </div>
+
+        </div>
+
+
+         </div>
+              </div>
+            </div>
+
+<!-------------------------------------------- FILTER ------------------------------------------->
+
+
 </body>
 </html>

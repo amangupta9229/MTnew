@@ -22,8 +22,8 @@ mongoose.set('useUnifiedTopology', true);
 
 
 //APP CONFIG
-//mongoose.connect("mongodb://localhost:27017/MoMdb", { useNewUrlParser: true });
-mongoose.connect("mongodb+srv://amangupta9229:powergrid2@cluster0-5bycj.mongodb.net/<dbname>?retryWrites=true&w=majority", { useNewUrlParser: true });
+mongoose.connect("mongodb://localhost:27017/MoMdb", { useNewUrlParser: true });
+//mongoose.connect("mongodb+srv://amangupta9229:powergrid2@cluster0-5bycj.mongodb.net/<dbname>?retryWrites=true&w=majority", { useNewUrlParser: true });
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
@@ -180,10 +180,17 @@ app.get("/tasks",isLoggedIn, function(req, res){
         if(err){
             console.log("ERROR");
         } else {
+            //console.log(req.body);
             res.render("task", {tasks:tasks})
         }
     });
 });
+
+
+
+
+
+
 
 //NEW TASK ROUTE
 app.get("/tasks/new",isLoggedIn, function(req, res){
@@ -193,9 +200,15 @@ app.get("/tasks/new",isLoggedIn, function(req, res){
 //CREATE TASK ROUTE
 app.post("/tasks",isLoggedIn, function(req, res){
     //create task
+    console.log(" start record");
     console.log(req.body);
+    console.log(" start individual record");
+    console.log(req.body.task.assignedto);
     req.body.task.body = req.sanitize(req.body.task.body)
+    console.log(" full record");
     console.log(req.body);
+    console.log(" individual record");
+    console.log(req.body.task.assignedto);
     Task.create(req.body.task, function(err, newTask){
         if(err){
             res.render("newtask");
@@ -205,6 +218,128 @@ app.post("/tasks",isLoggedIn, function(req, res){
         }
     });
 });
+
+
+//////////////////////////////////    FILTER ROUTES //////////////////////////
+
+// app.post('/search/', isLoggedIn, function(req, res) {
+
+//     var assignedTo = req.body.task.name;
+//     var priorityIs = req.body.task.pname;
+//     var   statusIs  = req.body.task.sname;
+
+//     console.log(" start record");
+//     console.log(req.body);
+//     console.log(" start individual record");
+//     console.log(assignedTo);
+//     console.log(priorityIs);
+//     console.log(statusIs);
+
+//     // if(assignedTo !=''){
+//     //     flterParameter={p: assignedTo}
+//     // }
+
+    
+//     if(assignedTo !='' && priorityIs !='' && statusIs !='' ){
+//      var flterParameter={ $and:[{ "task.name":assignedTo},
+//     {$and:[{"task.pname":priorityIs},{"task.sname":statusIs}]}]
+//      }
+
+//     }else if(assignedTo !='' && priorityIs =='' && statusIs !=''){
+//       var flterParameter={ $and:[{ "task.name":assignedTo},{"task.sname":statusIs}]
+//          }
+//     }
+
+//     else if(assignedTo =='' && priorityIs !='' && statusIs !=''){
+//       var flterParameter={ $and:[{ "task.pname":priorityIs},{"task.sname":statusIs}]
+//          }
+//     }
+
+//     else if(assignedTo =='' && priorityIs =='' && statusIs !=''){
+//       var flterParameter={"task.sname":statusIs}
+//     }
+
+//     else{
+//       var flterParameter={}
+//     }
+
+//     var taskFilter =Task.find(flterParameter);
+//     taskFilter.exec(function(err,tasks){
+//         if(err) throw err;
+//         res.render('task', { title: 'Employee Records', tasks:tasks});
+//         });
+//     });
+/////////////////////////////////////////////////////////////////////////////  
+
+//FILTER ROUTES//////////////////////
+
+app.get("/search/",isLoggedIn, function(req, res){
+    res.redirect("/tasks"); 
+ });
+
+app.post('/search/', isLoggedIn, function(req, res,next) {
+
+    var assignedTo = req.body.task.name;
+    var priorityIs = req.body.task.pname;
+    var   statusIs  = req.body.task.sname;
+
+    console.log(" start record");
+    console.log(req.body);
+    console.log(" start individual record");
+    console.log(assignedTo);
+    console.log(priorityIs);
+    console.log(statusIs);
+
+    // if(assignedTo !=''){
+    //     flterParameter={p: assignedTo}
+    // }
+
+    
+    if(assignedTo !='' && (priorityIs !='' && statusIs !='') ){
+     var flterParameter={ $and:[{ status:assignedTo},
+    {$and:[{priority:priorityIs},{status:statusIs}]}]
+     }
+
+    }else if(assignedTo !='' && (priorityIs =='' && statusIs !='')){
+      var flterParameter={ $and:[{ assignedto:assignedTo},{status:statusIs}]
+         }
+    }
+
+    else if(assignedTo =='' && (priorityIs !='' && statusIs !='')){
+      var flterParameter={ $and:[{ priority:priorityIs},{status:statusIs}]
+         }
+    }
+
+    else if(assignedTo !='' && (priorityIs !='' && statusIs =='')){
+        var flterParameter={ $and:[{ priority:priorityIs},{assignedto:assignedTo}]
+           }
+      }
+
+    else if(assignedTo !='' && priorityIs =='' && statusIs ==''){
+      var flterParameter={assignedto:assignedTo}
+    }
+
+    else if(assignedTo =='' && priorityIs !='' && statusIs ==''){
+        var flterParameter={priority:priorityIs}
+      }
+
+      else if(assignedTo =='' && priorityIs =='' && statusIs !=''){
+        var flterParameter={status:statusIs}
+      }
+
+    else{
+      var flterParameter={}
+    }
+
+    var taskFilter =Task.find(flterParameter);
+    taskFilter.exec(function(err,tasks){
+        if(err) throw err;
+        res.render('task', { title: 'Employee Records', tasks:tasks});
+        });
+    });
+
+
+
 
 //SHOW TASK ROUTE
 app.get("/tasks/:id",isLoggedIn, function(req, res){
@@ -216,6 +351,8 @@ app.get("/tasks/:id",isLoggedIn, function(req, res){
         }
     });
 });
+
+
 
 //EDIT ROUTE
 app.get("/tasks/:id/edit",isLoggedIn, function(req, res){
