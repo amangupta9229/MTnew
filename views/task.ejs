@@ -105,7 +105,8 @@
     <div class="ui top attached segment">
         <div class="ui divided items">
             <% if(tasks.length>0) { %>
-            <% tasks.forEach(function(task){ %>
+                <% for(let i=tasks.length-1;i>=0;i--){ %>
+                <% var task=tasks[i]; %>
                 <div class="item">
                     <div class="content">
                 
@@ -130,7 +131,7 @@
                         </div>
                     </div>
                 </div>
-                <%}) } else {%>
+                <%}} else {%>
                 <h2>No Tasks Found</h2>
                 <%}%>        
         </div>
