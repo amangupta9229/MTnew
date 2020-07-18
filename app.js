@@ -51,7 +51,7 @@ app.use(function(req,res,next){
 })
 
 
-
+let attendees=["Gitanjali Singh","anshika"];
 //MONGOOSE/MODEL CONFIG
 var blogSchema = new mongoose.Schema({
     title: String,
@@ -222,56 +222,7 @@ app.post("/tasks",isLoggedIn, function(req, res){
 
 //////////////////////////////////    FILTER ROUTES //////////////////////////
 
-// app.post('/search/', isLoggedIn, function(req, res) {
-
-//     var assignedTo = req.body.task.name;
-//     var priorityIs = req.body.task.pname;
-//     var   statusIs  = req.body.task.sname;
-
-//     console.log(" start record");
-//     console.log(req.body);
-//     console.log(" start individual record");
-//     console.log(assignedTo);
-//     console.log(priorityIs);
-//     console.log(statusIs);
-
-//     // if(assignedTo !=''){
-//     //     flterParameter={p: assignedTo}
-//     // }
-
-    
-//     if(assignedTo !='' && priorityIs !='' && statusIs !='' ){
-//      var flterParameter={ $and:[{ "task.name":assignedTo},
-//     {$and:[{"task.pname":priorityIs},{"task.sname":statusIs}]}]
-//      }
-
-//     }else if(assignedTo !='' && priorityIs =='' && statusIs !=''){
-//       var flterParameter={ $and:[{ "task.name":assignedTo},{"task.sname":statusIs}]
-//          }
-//     }
-
-//     else if(assignedTo =='' && priorityIs !='' && statusIs !=''){
-//       var flterParameter={ $and:[{ "task.pname":priorityIs},{"task.sname":statusIs}]
-//          }
-//     }
-
-//     else if(assignedTo =='' && priorityIs =='' && statusIs !=''){
-//       var flterParameter={"task.sname":statusIs}
-//     }
-
-//     else{
-//       var flterParameter={}
-//     }
-
-//     var taskFilter =Task.find(flterParameter);
-//     taskFilter.exec(function(err,tasks){
-//         if(err) throw err;
-//         res.render('task', { title: 'Employee Records', tasks:tasks});
-//         });
-//     });
-/////////////////////////////////////////////////////////////////////////////  
-
-//FILTER ROUTES//////////////////////
+////////////////////////////////FILTER TASKS ROUTES//////////////////////
 
 app.get("/search/",isLoggedIn, function(req, res){
     res.redirect("/tasks"); 
@@ -338,8 +289,95 @@ app.post('/search/', isLoggedIn, function(req, res,next) {
         });
     });
 
+// ///////////////////FILTER MEETINGS ROUTE//////////////////////
 
 
+// app.get("/searchm/",isLoggedIn, function(req, res){
+//     res.redirect("/blogs"); 
+//  });
+
+
+// app.post('/searchm/', isLoggedIn, function(req, res,next) {
+
+//     var attendeesAre = req.body.blog.member;
+//     var meetingcategoryIs = req.body.blog.category;
+//     var   locationIs  = req.body.blog.locationname;
+
+//     console.log(" start record");
+//     console.log(req.body);
+//     console.log(" start individual record");
+//     console.log(attendeesAre);
+//     console.log(meetingcategoryIs);
+//     console.log(locationIs);
+
+//     // if(attendeesAre !=''){
+//     //     flterParameter={p: attendeesAre}
+//     // }
+
+    
+//     // if(attendeesAre !='' && (meetingcategoryIs !='' && locationIs !='') ){
+//     //  var flterParameter={ $and:[{ attendees:attendeesAre},
+//     // {$and:[{meetingcategory:meetingcategoryIs},{location:locationIs}]}]
+//     //  }
+
+//     // }else if(attendeesAre !='' && (meetingcategoryIs =='' && locationIs !='')){
+//     //   var flterParameter={ $and:[{ attendees:attendeesAre},{location:locationIs}]
+//     //      }
+//     // }
+
+//     // else if(attendeesAre =='' && (meetingcategoryIs !='' && locationIs !='')){
+//     //   var flterParameter={ $and:[{ meetingcategory:meetingcategoryIs},{location:locationIs}]
+//     //      }
+//     // }
+
+//     // else if(attendeesAre !='' && (meetingcategoryIs !='' && locationIs =='')){
+//     //     var flterParameter={ $and:[{ meetingcategory:meetingcategoryIs},{attendees:attendeesAre}]
+//     //        }
+//     //   }
+
+//     // else if(attendeesAre !='' && meetingcategoryIs =='' && locationIs ==''){
+//     //   var flterParameter={attendees:attendeesAre}
+//     // }
+
+//     // else if(attendeesAre =='' && meetingcategoryIs !='' && locationIs ==''){
+//     //     var flterParameter={meetingcategory:meetingcategoryIs}
+//     //   }
+
+//     // else if(attendeesAre =='' && meetingcategoryIs =='' && locationIs !=''){
+//     //     var flterParameter={location:locationIs}
+//     //   }
+
+//     if(attendeesAre !=''){
+//         console.log(" attendees are: ")
+//         console.log(attendeesAre);
+
+//         for(var i=0;i<attendees.length;i++){ 
+//             console.log(" f:")
+//             var x=attendees[i]; 
+//             console.log(" x:")
+//             console.log(x);
+//             if(x==attendeesAre){
+//             var flterParameter={x:attendeesAre}
+//             }
+//       }
+//     }
+//     else{
+//       var flterParameter={}
+//       console.log(" y:")
+//     }
+
+//     var blogFilter =Blog.find(flterParameter);
+//     blogFilter.exec(function(err,blogs){
+//         if(err) throw err;
+//         res.render('index', { title: 'Employee Records', blogs:blogs});
+//         });
+//     });
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////
 
 //SHOW TASK ROUTE
 app.get("/tasks/:id",isLoggedIn, function(req, res){

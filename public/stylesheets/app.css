@@ -9,6 +9,11 @@ i.icon {
   margin-top: 6.0em;
 }
 
+#filterMeetingsID {
+  margin-top: 6.0em;
+}
+
+
  #navbarID{
     height:4em;
 }
@@ -28,6 +33,19 @@ i.icon {
   margin-right:-20% ;
     float: right;
 } 
+
+#MeetingFilterID{
+  float: left;
+  margin-left: -20%;
+} 
+
+#meetingArchiveID{
+  margin-top: -6.0em;
+  margin-right:0% ;
+    float: right;
+} 
+
+
 #userID{
     font-size: 200%;
 }

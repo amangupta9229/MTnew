@@ -11,7 +11,7 @@
         <div class="ui fixed inverted menu" id="navbarID">
             <div class="ui container">
                 <div class="item p-2 bd-highlight">
-                <p class="item" id="visionetID">VISIONET</p>
+                    <p class="item" id="visionetID">LetsTransport</p>
                 </div>
                 <div class="header item p-2 bd-highlight" id="titleID"><i class="fas fa-users fa-2x"></i> &nbsp; Meeting Tracker</div>
                 <a href="/" class="item p-2 bd-highlight">Meetings</a>
@@ -26,11 +26,100 @@
         </div>
         </div>
 
+
+            <!-------------------------------------------- FILTER ------------------------------------------->
+            <!-- <div class="container" id="filterMeetingsID">
+                <div class="row">
+                   
+             <div class="col-md-6">
+                <form action="/searchm/" id="MeetingFilterID" class="form-horizontal" method="POST"  role="form">
+    
+                    <div class="col-md-12">
+                        <h1>Filter Meetings Archive</h1>
+                        <br>
+                    </div>
+                            
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="email" class="col-md-12 control-label">Attendees</label>
+                            <div class="col-md-12">
+                                <select class="form-control" name="blog[member]">
+                                    <option selected =""></option>
+                                    <option value="Alok Bansal">Alok Bansal</option>
+                                    <option value="Amit Khandelwal">Amit Khandelwal</option>
+                                    <option value="Gitanjali Singh">Gitanjali Singh</option>
+                                    <option value="Jimmy Cherian">Jimmy Cherian</option>
+                                    <option value="Kshitij Singhal">Kshitij Singhal</option>
+                                    <option value="Miriam Shaju">Miriam Shaju</option>
+                                    <option value="Narmada Lakshamanan">Narmada Lakshmanan</option>
+                                    <option value="Raju Varda">Raju Varada</option>
+                                    <option value="Sundar K">Sundar K</option>
+                                    <option value="Tushar Singh">Tushar Singh</option>
+                                    <option value="Vishwa K">Vishwa K</option>
+                                  </select></div>
+                        </div>
+                     </div>
+               <div class="col-md-12">
+                <div class="form-group">
+                    <label for="email" class="col-md-12 control-label">Meeting Category</label>
+                    <div class="col-md-12">
+                        <select class="form-control" name="blog[category]">
+                            <option selected =""></option>
+                            <option value="Daily Strategic Hiring">Daily Strategic Hiring</option>
+                            <option value="Project Blue">Project Blue</option>
+                            <option value="BFSI IT GTM/Sales Cadence">BFSI IT GTM/Sales Cadence</option>
+                            <option value="MD Staff Meeting">MD Staff Meeting</option>
+                            <option value="Alok's Meetings">Alok's Meetings</option>
+                            <option value="Hiring Meeting">Hiring Meeting</option>
+                            <option value="Innovation Lab">Innovation Lab</option>
+                            <option value="KRA Meeting">KRA Meeting</option>
+                            <option value="Client Profitability">Client Profitability</option>
+                            <option value="Revenue and Cost Forecast">Revenue and Cost Forecast</option>
+                            <option value="Transitions and Onboarding">Transitions and Onboarding</option>
+                            <option value="BFS IT Sales">BFS IT Sales</option>
+                            <option value="VSPL Staff">VSPL Staff</option>
+                          </select></div>
+                </div>
+             </div>
+
+             <div class="col-md-12">
+                <div class="form-group">
+                    <label for="email" class="col-md-12 control-label">Location</label>
+                    <div class="col-md-12">
+                        <select class="form-control" name="blog[locationname]">
+                            <option selected =""></option>
+                            <option value="Conference Room A">Conference Room A</option>
+              <option value="Conference Room B">Conference Room B</option>
+              <option value="Conference Room C">Conference Room C</option>
+              <option value="Conference Room D">Conference Room D</option>
+              <option value="Conference Room E">Conference Room E</option>
+              <option value="Conference Room F">Conference Room F</option>
+                          </select></div>
+                </div>
+             </div>
+               
+               <div class="col-md-12">
+                  <div class="form-group">
+                      <label for="email" class="col-md-12 control-label">&nbsp;</label>
+                     
+                       <div class="col-md-12">
+                          <input type="submit" class="form-control btn btn-primary" name="submit" placeholder="Filter">
+                      </div>
+                  </div>
+               </div>
+        </form>
+        </div> -->
+
+    <!-------------------------------------------- FILTER ------------------------------------------->
+      
+    <div class="col-md-6" id="meetingArchiveID">
 <div class="ui main text container">
     <div class="ui huge header">Meetings Archive</div>
     <div class="ui top attached segment">
         <div class="ui divided items">
-            <% blogs.forEach(function(blog){ %>
+                <% if(blogs.length>0) { %>
+                    <% for(let i=blogs.length-1;i>=0;i--){ %>
+                    <% var blog=blogs[i]; %>
                 <div class="item">
                     <div class="content">
                         <div class="header">
@@ -48,9 +137,14 @@
                         </div>
                     </div>
                 </div>
-            <% }) %>
+                <%}} else {%>
+                    <h2>No Meetings Found</h2>
+                    <%}%>   
         </div>
     </div>
+</div>
+</div>
+</div>
 </div>
 </body>
 </html>
