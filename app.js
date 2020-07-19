@@ -22,8 +22,8 @@ mongoose.set('useUnifiedTopology', true);
 
 
 //APP CONFIG
-//mongoose.connect("mongodb://localhost:27017/MoMdb", { useNewUrlParser: true });
-mongoose.connect("mongodb+srv://amangupta9229:powergrid2@cluster0-5bycj.mongodb.net/<dbname>?retryWrites=true&w=majority", { useNewUrlParser: true });
+mongoose.connect("mongodb://localhost:27017/MoMdb", { useNewUrlParser: true });
+//mongoose.connect("mongodb+srv://amangupta9229:powergrid2@cluster0-5bycj.mongodb.net/<dbname>?retryWrites=true&w=majority", { useNewUrlParser: true });
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
@@ -89,10 +89,21 @@ var Task = mongoose.model("Task", taskSchema);
 
 //RESTFUL ROUTES
 app.get("/",isLoggedIn, function(req, res){
-   res.redirect("/blogs"); 
+   res.redirect("/home"); 
 });
 
-//INDEX ROUTE
+//HOME ROUTE
+app.get("/home",isLoggedIn, function(req, res){
+    Blog.find({}, function(err, blogs){
+        if(err){
+            console.log("ERROR");
+        } else {
+            res.render("home", {blogs:blogs});
+        }
+    });
+});
+
+//HOME ROUTE
 app.get("/blogs",isLoggedIn, function(req, res){
     Blog.find({}, function(err, blogs){
         if(err){

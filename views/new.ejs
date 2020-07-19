@@ -45,22 +45,29 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
 
+<!-- 
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet"> -->
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script> -->
+<!-- <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script> -->
 
+<!-- <link href="summernote.css" rel="stylesheet">
+<script src="summernote.min.js"></script>
 
+<script src="lang/summernote-ko-KR.js"></script> -->
 
 
 
 
     </head>
-    <body>
+    <body class="newBody">
         <div class="d-flex bd-highlight  align-items-center">
             <div class="ui fixed inverted menu" id="navbarID">
                 <div class="ui container">
                     <div class="item p-2 bd-highlight">
-                        <p class="item" id="visionetID">LetsTransport</p>
+                        <p class="item" id="visionetID">VISIONET</p>
                     </div>
                     <div class="header item p-2 bd-highlight" id="titleID"><i class="fas fa-users fa-2x"></i> &nbsp; Meeting Tracker</div>
-                    <a href="/" class="item p-2 bd-highlight">Meetings</a>
+                    <a href="/blogs" class="item p-2 bd-highlight">Meetings</a>
                     <a href="/blogs/new" class="item p-2 bd-highlight">New Meeting</a>
                     <a href="/tasks" class="item p-2 bd-highlight">Tasks</a>
                     <a href="/tasks/new" class="item mr-auto p-2 bd-highlight">Add Tasks</a>
@@ -70,18 +77,34 @@
                     <a href="/logout" class="item p-2 bd-highlight" id="logoutID"><i class="fas fa-power-off fa-lg "></i></a>
                 </div>
             </div>
-            </div>
-<div class="ui main text container segment">
-    <div class="ui huge header">New Meeting</div>
-    <form class="ui form" action="/blogs" method="POST">
+        </div>
 
-        <div class="field">
-            <label>Agenda</label>
-            <input type="text" name="blog[title]" placeholder="title">
+<!-- --------------------------------------------------PAGE CONTENT----------------------------------------------------- -->
+
+<div class="" id="filterMeetingsID"></div>
+<!-- <div class="container" id="filterMeetingsID"> -->
+    <div class="row" style="height: 90%;">
+        <div class="col-md-6" id="leftSide">
+<!-- <div class="ui main text container segment"> -->
+    <!-- <div class="leftSide"> -->
+        <nav class="navbar navbar-light bg-primary text-white justify-content-between" id="navLeftId">
+            <h2>New Meeting<h2>
+        </nav>
+      <div class="card text-white bg-white mb-3" id="cardNewId">
+        <!-- <div class="card-header bg-primary">Header</div> -->
+        <!-- <h2 id="cardHeaderId">New Meeting</h2> -->
+        <div class="card-body bg-white">
+            
+    
+    <form class="form-group" action="/blogs" method="POST">
+
+        <div class="field" >
+            <label style="font-size: x-large;">Agenda</label>
+            <input type="text" name="blog[title]" placeholder="Title...">
         </div>
 
         <div class="field">
-          <label>Location</label>
+            <label style="font-size: x-large;">Location</label>
           <select class="custom-select" name="blog[location]">
               <option selected="" >Location</option>
               <option value="Conference Room A">Conference Room A</option>
@@ -91,21 +114,27 @@
               <option value="Conference Room E">Conference Room E</option>
               <option value="Conference Room F">Conference Room F</option>
           </select>
-      </div>
+       </div>
 
-   <div> 
-	<div class="field"> 
-        <label>Start Time:</label>
+       <div class="field">
+       <div class="row">
+        <div class="col-md-6">
+	<!-- <div class="field">  -->
+        <label style="font-size: x-large;">Start</label>
         <input type="datetime-local" name="blog[starttime]">
-		</div>
-	</div>
-	<div class="field"> 
-		<label>End Time</label>
+		<!-- </div> -->
+       </div>
+       <div class="col-md-6">
+	        <!-- <div class="field">  -->
+                <label style="font-size: x-large;">End</label>
         <input type="datetime-local" name="blog[endtime]">
-	</div>
+            <!-- </div> -->
+        </div>
+        </div>
+       </div>
 
-              <div class="field">
-                <label>Attendees</label>
+            <div class="field">
+                <label style="font-size: x-large;">Attendees</label>
                   <select class="mul-select" name=blog[attendees] multiple="true" >
                       <option value="Alok Bansal">Alok Bansal</option>
                       <option value="Amit Khandelwal">Amit Khandelwal</option>
@@ -120,11 +149,11 @@
                       <option value="Vishwa K">Vishwa K</option>
                       </select>
                   </select>
-              </div> 
+            </div> 
 
-              <div class="field">
-                <label>Meeting Category:</label>
-                  <select class="mul-select2" name=blog[meetingcategory] multiple="true" >
+            <div class="field">
+                <label style="font-size: x-large;">Meeting Category</label>
+                  <select class="mul-select2" id="meetingCategoryId" name=blog[meetingcategory] multiple="true" >
                       <option value="Daily Strategic Hiring">Daily Strategic Hiring</option>
                       <option value="Project Blue">Project Blue</option>
                       <option value="BFSI IT GTM/Sales Cadence">BFSI IT GTM/Sales Cadence</option>
@@ -140,19 +169,38 @@
                       <option value="VSPL Staff">VSPL Staff</option>
                       </select>
                   </select>
-              </div> 
+            </div> 
 
-       <div class="field">
-            <label>Meeting Minutes</label>
-            <textarea name="blog[body]" id="textareaID"></textarea>
+              <div class="field">
+              <input class="ui violet basic button" type="submit">
+              </div>
+            </div>
         </div>
+  
+            </div>
+           
+            <div class="col-md-6"> 
+                <nav class="navbar navbar-light bg-primary text-white justify-content-between" id="navHeaderId">
+                    <h2>Meeting Minutes<h2>
+                      <!-- <button class="btn btn-outline- my-2 my-sm-0" type="submit">Search</button> -->
+                      <button type="button" class="btn btn-dark"><i class="fas fa-plus-circle"></i> Add Topic</button>
+                </nav>
+       <div class="rightSide">  
+       <!-- <div class="field">
+           <div id="header1Id">
+            <label class="ui header">Meeting Minutes</label>
+            <br>
+            <br>
+           </div> -->
 
-        <input class="ui violet basic button" type="submit">
+            <textarea name="blog[body]" id="textareaID" value="Meeting Minutes"></textarea>
+        </div>
+        
+    </div>
     </form>
+   
+    </div>
 </div>
-
-
-
   <script>
     $(document).ready(function(){
         $(".mul-select").select2({
@@ -173,6 +221,25 @@
         $(function () {
                 $('#datetimepicker1').datetimepicker();
             });
+
+        $('#teaxtareaID').summernote();
+
+//             window.onscroll = function() {myFunction()};
+
+// // Get the header
+// var header = document.getElementsById("cardNewId");
+
+// // Get the offset position of the navbar
+// var sticky = header.offsetTop;
+
+// // Add the sticky class to the header when you reach its scroll position. Remove "sticky" when you leave the scroll position
+// function myFunction() {
+//   if (window.pageYOffset > sticky) {
+//     header.classList.add("sticky");
+//   } else {
+//     header.classList.remove("sticky");
+//   }
+// }
       </script>
     
 

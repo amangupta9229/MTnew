@@ -9,13 +9,58 @@ i.icon {
   margin-top: 6.0em;
 }
 
+#header2Id{
+  background-color:cyan;
+}
+
 #filterMeetingsID {
   margin-top: 6.0em;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+#meetingCategoryId {
+  max-width: 100%;
+  width: 100%;
 }
 
 
+#cardNewId {
+  /* margin-top: 6.0em; */
+  max-width: 100%;
+  max-height: 100%;
+  height: 90%;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  overflow-y: auto;
+  
+}
+
+
+.rightSide{
+  background-color:#fff ;
+  /* box-shadow: 2px 2px 2px 2px #999999;*/
+} 
+
+#leftSide{
+ height: 100%; 
+}
+
  #navbarID{
     height:4em;
+}
+
+.newBody{
+  background-color:#eee ;
+  max-height: 100%;
+}
+
+#header1Id{
+  border:1px solid #999999;
+    margin:5px 0;
+    padding:3px;
 }
 
  #visionetID{
@@ -39,6 +84,9 @@ i.icon {
   margin-left: -20%;
 } 
 
+.field{
+  margin-bottom: 3%;
+}
 #meetingArchiveID{
   margin-top: -6.0em;
   margin-right:0% ;
@@ -55,7 +103,25 @@ i.icon {
 }
 
 #textareaID {
-    width: 100%;
+    width:100%;
+    height: 90%;
+    margin-top: 0%;
+    padding:3px;
+}
+
+#navHeaderId {
+  width:100%;
+  height: 10%;
+}
+
+#navLeftId {
+  width:100%;
+  height: 10%;
+}
+
+#cardHeaderId {
+  width:100%;
+  height: 9%;
 }
 
 .taskDiv{
