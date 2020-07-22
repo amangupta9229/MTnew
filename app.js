@@ -52,7 +52,11 @@ app.use(function(req,res,next){
 
 
 let attendees=["Gitanjali Singh","anshika"];
-//MONGOOSE/MODEL CONFIG
+
+/////////////////////////////MONGOOSE MODEL CONFIG///////////////////////////////////////////////////////////
+
+/////////////// BLOGS SCHEMA////////////////
+
 var blogSchema = new mongoose.Schema({
     title: String,
     location: String,
@@ -65,10 +69,7 @@ var blogSchema = new mongoose.Schema({
 });
 var Blog = mongoose.model("Blog", blogSchema);
 
-// Blog.create({
-//     title: "Test Blog",
-//     body: "HELLO THIS IS A BLOG POST"
-// });
+/////////////// TASKS SCHEMA////////////////
 
 var taskSchema = new mongoose.Schema({
     description: String,
@@ -82,28 +83,319 @@ var taskSchema = new mongoose.Schema({
 
 var Task = mongoose.model("Task", taskSchema);
 
-// Task.create({
-//     title: "Test Blog",
-//     body: "HELLO THIS IS A BLOG POST"
-// });
 
-//RESTFUL ROUTES
+/////////////// SELF NOTES SCHEMA////////////////
+
+var selfnoteSchema = new mongoose.Schema({
+    
+    title: String,
+    description: String,
+    created: {type: Date, default: Date.now}
+});
+
+var Selfnote = mongoose.model("Selfnote", selfnoteSchema);
+
+
+/////////////////////////////MONGOOSE MODEL CONFIG END///////////////////////////////////////////////////////////
+
+//////////////////////////////RESTFUL ROUTES/////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+//////////////////////////////////////  DASHBOARD ROTES //////////////////////////////////////////////
+app.get("/",isLoggedIn, function(req, res){
+    res.redirect("/dashboard"); 
+ });
+ 
+ //INDEX ROUTE
+ app.get("/dashboard",isLoggedIn, function(req, res){
+     var today = new Date();
+ 
+     var dateIs = today.getFullYear()+'-'+'0'+(today.getMonth()+1)+'-'+today.getDate();
+ 
+     console.log(" homes date");
+     console.log(dateIs);
+     
+ 
+     if(dateIs !=''){
+         var flterParameter={deadline:dateIs}
+       }
+ 
+     else{
+       var flterParameter={}
+     }
+ 
+     var taskFilter =Task.find();
+     taskFilter.exec(function(err,tasks){
+         if(err) throw err;
+         res.render('dashboard', { title: 'Employee Records', tasks:tasks});
+         });
+     });
+//////////////////////////////////////HOME ROTES //////////////////////////////////////////////
+
 app.get("/",isLoggedIn, function(req, res){
    res.redirect("/home"); 
 });
 
-//HOME ROUTE
+//INDEX ROUTE
 app.get("/home",isLoggedIn, function(req, res){
-    Blog.find({}, function(err, blogs){
-        if(err){
-            console.log("ERROR");
-        } else {
-            res.render("home", {blogs:blogs});
-        }
-    });
-});
+    var today = new Date();
 
-//HOME ROUTE
+    var dateIs = today.getFullYear()+'-'+'0'+(today.getMonth()+1)+'-'+today.getDate();
+
+    console.log(" homes date");
+    console.log(dateIs);
+    
+
+    if(dateIs !=''){
+        var flterParameter={deadline:dateIs}
+      }
+
+    else{
+      var flterParameter={}
+    }
+
+    var taskFilter =Task.find();
+    taskFilter.exec(function(err,tasks){
+        if(err) throw err;
+        res.render('home', { title: 'Employee Records', tasks:tasks});
+        });
+    });
+
+//     Blog.find({}, function(err, tasks){
+//         if(err){
+//             console.log("ERROR");
+//         } else {
+//             res.render("home", {tasks:tasks});
+//         }
+//     });
+// });
+
+//HOME TODAY FILTER ROUTE//
+app.get("/filterbyToday",isLoggedIn, function(req, res){
+    res.redirect("/home"); 
+ });
+
+app.post('/filterbyToday', isLoggedIn, function(req, res,next) {
+
+    var today = new Date();
+
+    var dateIs = today.getFullYear()+'-'+'0'+(today.getMonth()+1)+'-'+today.getDate();
+
+   
+    var dateTom = today.getFullYear()+'-'+'0'+(today.getMonth()+1)+'-'+(today.getDate()+1);
+    
+
+
+    
+    
+        if(dateIs !=''){
+            var flterParameter={deadline:dateIs}
+          }
+    
+        else{
+          var flterParameter={}
+        }
+    
+        var taskFilter =Task.find(flterParameter);
+        taskFilter.exec(function(err,tasks){
+            if(err) throw err;
+            res.render('home', { title: 'Employee Records', tasks:tasks});
+            });
+    
+
+
+    // if(dateTom !=''){
+    //     var flterParameter={deadline:dateTom}
+    //   }
+
+    // else{
+    //   var flterParameter={}
+    // }
+
+    // var taskFilter =Task.find(flterParameter);
+    // taskFilter.exec(function(err,tasks){
+    //     if(err) throw err;
+    //     res.render('home', { title: 'Employee Records', tasks:tasks});
+    //     });
+
+    });
+
+    //HOME  TOMMORROW FILTER ROUTE//
+app.get("/filterbyTommorrow",isLoggedIn, function(req, res){
+    res.redirect("/home"); 
+ });
+
+app.post('/filterbyTommorrow', isLoggedIn, function(req, res,next) {
+
+        const today = new Date()
+        const tommorrow = new Date(today)
+        tommorrow.setDate(tommorrow.getDate() + 1)
+
+        if( (tommorrow.getMonth()+1)<10 && tommorrow.getDate()<10 ){
+        var dateTom = tommorrow.getFullYear()+'-'+'0'+(tommorrow.getMonth()+1)+'-'+'0'+tommorrow.getDate();
+        }
+        if( (tommorrow.getMonth()+1)<10 && tommorrow.getDate()>10 ){
+            var dateTom = tommorrow.getFullYear()+'-'+'0'+(tommorrow.getMonth()+1)+'-'+tommorrow.getDate();
+        }
+        if( (tommorrow.getMonth()+1)>10 && tommorrow.getDate()<10 ){
+            var dateTom = tommorrow.getFullYear()+'-'+(tommorrow.getMonth()+1)+'-'+'0'+tommorrow.getDate();
+        }
+        if( (tommorrow.getMonth()+1)>10 && tommorrow.getDate()>10 ){
+            var dateTom = tommorrow.getFullYear()+'-'+(tommorrow.getMonth()+1)+'-'+tommorrow.getDate();
+        }
+
+
+    if(dateTom !=''){
+        var flterParameter={deadline:dateTom}
+      }
+
+    else{
+      var flterParameter={}
+    }
+
+    var taskFilter =Task.find(flterParameter);
+    taskFilter.exec(function(err,tasks){
+        if(err) throw err;
+        res.render('home', { title: 'Employee Records', tasks:tasks});
+        });
+    });
+
+
+
+    /////////////HOME UPCOMING FILTER ROUTE//
+app.get("/filterbyUpcoming",isLoggedIn, function(req, res){
+    res.redirect("/home"); 
+ });
+
+app.post('/filterbyUpcoming', isLoggedIn, function(req, res,next) {
+
+    // const today = new Date()
+    // const tommorrow = new Date(today)
+    // tommorrow.setDate(tommorrow.getDate() + 2)
+
+    // if( (tommorrow.getMonth()+1)<10 && tommorrow.getDate()<10 ){
+    // var date2 = tommorrow.getFullYear()+'-'+'0'+(tommorrow.getMonth()+1)+'-'+'0'+tommorrow.getDate();
+    // }
+    // if( (tommorrow.getMonth()+1)<10 && tommorrow.getDate()>10 ){
+    //     var date2 = tommorrow.getFullYear()+'-'+'0'+(tommorrow.getMonth()+1)+'-'+tommorrow.getDate();
+    // }
+    // if( (tommorrow.getMonth()+1)>10 && tommorrow.getDate()<10 ){
+    //     var date2 = tommorrow.getFullYear()+'-'+(tommorrow.getMonth()+1)+'-'+'0'+tommorrow.getDate();
+    // }
+    // if( (tommorrow.getMonth()+1)>10 && tommorrow.getDate()>10 ){
+    //     var date2 = tommorrow.getFullYear()+'-'+(tommorrow.getMonth()+1)+'-'+tommorrow.getDate();
+    // }
+
+
+ 
+    // tommorrow.setDate(tommorrow.getDate() + 1)
+
+    // if( (tommorrow.getMonth()+1)<10 && tommorrow.getDate()<10 ){
+    // var date3 = tommorrow.getFullYear()+'-'+'0'+(tommorrow.getMonth()+1)+'-'+'0'+tommorrow.getDate();
+    // }
+    // if( (tommorrow.getMonth()+1)<10 && tommorrow.getDate()>10 ){
+    //     var date3 = tommorrow.getFullYear()+'-'+'0'+(tommorrow.getMonth()+1)+'-'+tommorrow.getDate();
+    // }
+    // if( (tommorrow.getMonth()+1)>10 && tommorrow.getDate()<10 ){
+    //     var date3 = tommorrow.getFullYear()+'-'+(tommorrow.getMonth()+1)+'-'+'0'+tommorrow.getDate();
+    // }
+    // if( (tommorrow.getMonth()+1)>10 && tommorrow.getDate()>10 ){
+    //     var date3 = tommorrow.getFullYear()+'-'+(tommorrow.getMonth()+1)+'-'+tommorrow.getDate();
+    // }
+
+    // console.log(date2);
+    // console.log(date3);
+    var currentStatus = "Open";
+
+    if(currentStatus!=" " ){
+        var flterParameter={status:currentStatus}
+        // {$and:[{deadline:date2},{deadline:date3 }]}
+      }
+
+    var taskFilter =Task.find(flterParameter);
+    taskFilter.exec(function(err,tasks){
+        if(err) throw err;
+        res.render('home', { title: 'Employee Records', tasks:tasks});
+        });
+    });
+
+
+    //HOME COMPLETED FILTER ROUTE//
+app.get("/filterbyCompleted",isLoggedIn, function(req, res){
+    res.redirect("/home"); 
+ });
+
+app.post('/filterbyCompleted', isLoggedIn, function(req, res,next) {
+
+    // var today = new Date();
+
+    // var dateIs = today.getFullYear()+'-'+'0'+(today.getMonth()+1)+'-'+today.getDate();
+
+    // console.log(" todays date");
+    // console.log(dateIs);
+
+    var currentStatus = "Closed";
+
+    if(currentStatus!=" "){
+        var flterParameter={status:currentStatus}
+      }
+
+    else{
+      var flterParameter={}
+    }
+    
+
+    var taskFilter =Task.find(flterParameter);
+    taskFilter.exec(function(err,tasks){
+        if(err) throw err;
+        res.render('home', { title: 'Employee Records', tasks:tasks});
+        });
+    });
+
+
+    //HOME OVERDUE FILTER ROUTE//
+app.get("/filterbyOverdue",isLoggedIn, function(req, res){
+    res.redirect("/home"); 
+ });
+
+app.post('/filterbyOverdue', isLoggedIn, function(req, res,next) {
+
+    const today = new Date()
+    const yesterday = new Date(today)
+    yesterday.setDate(yesterday.getDate() - 1)
+
+    var dateIs = yesterday.getFullYear()+'-'+'0'+(yesterday.getMonth()+1)+'-'+(yesterday.getDate());
+
+    console.log(" tommorrows date");
+    console.log(dateIs);
+    
+
+    if(dateIs !=''){
+        var flterParameter={deadline:dateIs}
+      }
+
+    else{
+      var flterParameter={}
+    }
+
+    var taskFilter =Task.find(flterParameter);
+
+    // const result = deadline.filter(deadline => deadline < dateIs);
+    taskFilter.exec(function(err,tasks){
+        if(err) throw err;
+        res.render('home', { title: 'Employee Records', tasks:tasks});
+        });
+    });
+
+/////////////////////HOME PAGE ROUTES END////////////////////////////////////////////
+
+
+
+/////////////////////////////////MEETING PAGE ROUTE//////////////////////////////////////////
+
 app.get("/blogs",isLoggedIn, function(req, res){
     Blog.find({}, function(err, blogs){
         if(err){
@@ -439,6 +731,14 @@ app.delete("/tasks/:id",isLoggedIn, function(req, res){
     //redirect somewhere
 });
 
+//////////////////////////////// SELF NOTES ROUTES//////////////////////////////////////////////////////////////
+
+app.get("/selfnotes",isLoggedIn, function(req, res){
+    res.render("selfnotes");
+});
+
+//////////////////////////////// SELF NOTES ROUTES END//////////////////////////////////////////////////////////////
+
 //AUTHENTICATION ROUTES //////////////////////////////////////////////////////
 
 //REGISTER ROUTES
@@ -497,3 +797,9 @@ function isLoggedIn(req,res,next){
 app.listen( process.env.PORT || 3001, function(){
     console.log("Server is running");
 })
+
+
+
+
+///////////////////////////////////////////////////////////////////////////////////
+

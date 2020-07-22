@@ -51,10 +51,10 @@
          <!-- Sidebar -->
          <div id="sidebar-wrapper">
             <ul class="sidebar-nav nav-pills nav-stacked" id="menu">
-              <li>
-                <a href="/dashboard" class="item p-2 bd-highlight">
-                  <span class="fa-stack fa-lg pull-left"><i class="fa fa-users fa-stack-1x "></i></span> Dashboard</a>
-             </li>
+                <li>
+                    <a href="/dashboard" class="item p-2 bd-highlight">
+                      <span class="fa-stack fa-lg pull-left"><i class="fa fa-users fa-stack-1x "></i></span> Dashboard</a>
+                 </li>
               <li class="active">
                   <a href="/home" class="item p-2 bd-highlight">
                     <span class="fa-stack fa-lg pull-left"><i class="fa fa-home fa-stack-1x "></i></span> Home</a>
@@ -87,157 +87,71 @@
    
   
      <!------------------------SIDE BAR END--------------------------------------------------------->
-<!------------------------TOGGLE BUTTONS --------------------------------------------------------->
-
-  <!------------------------TOGGLE BUTTONS END-------------------------------------------------------->
-       <!-------------------------------------------- FILTER ------------------------------------------->
        <div class="col-md-10">  
 
-         <div class="row d-flex justify-content-around" id="homeButtonsId">
           
-
-            
-              <!-- <form action="/filterbyToday" id="EmployeeFormID" class="form-horizontal" method="POST"  role="form" style="margin-left:0%;"> 
-                <div class="form-row align-items-center">
-                    <button type="submit" class="btn btn-lg btn-outline-primary">TODAY</button>
-                   
-                </div>
-              </form> -->
-              
-              <!-- <a href="/filterbyToday" method="POST" class="btn btn-lg btn-outline-primary">Go to Google</a> -->
-              <!-- <form action="/filterbyToday" id="EmployeeFormID" class="form-horizontal" method="POST"  role="form"> 
-                <div class="form-row align-items-center">
-                     <input type="submit" class="btn btn-lg btn-outline-primary" value="TODAY"/> 
-                    
-                 </div>
-              </form> -->
-              <!-- <a href="/filterbyTommorrow" method="POST">Go to Google</a> -->
-
-              <form action="/filterbyTodat" method="post" style="margin-left:-20%;">
-                <input type="submit" name="upvote" value="manager"/>
-            </form>
-
-            <form action="/filterbyToday" id="EmployeeFormID" class="form-horizontal" method="POST"  role="form"> 
-              <div class="form-row align-items-center">
-                  <button type="submit" class="btn btn-lg btn-outline-primary">TODAY</button>
-                  <!-- <input type="submit" class="btn btn-lg btn-outline-primary" value="TOMMORROW"/> -->
-              </div>
-            </form>
-
-                <form action="/filterbyTommorrow" id="EmployeeFormID" class="form-horizontal" method="POST"  role="form"> 
-                  <div class="form-row align-items-center">
-                      <button type="submit" class="btn btn-lg btn-outline-secondary">TOMMORROW</button>
-                      <!-- <input type="submit" class="btn btn-lg btn-outline-primary" value="TOMMORROW"/> -->
-                  </div>
-                </form>
-           
-                  <form action="/filterbyUpcoming" id="EmployeeFormID" class="form-horizontal" method="POST"  role="form"> 
-                    <div class="form-row align-items-center">
-                         <button type="submit" class="btn btn-lg btn-outline-info">UPCOMING</button> 
-                        <!-- <input type="submit" class="btn btn-lg btn-outline-primary" value="UPCOMING"/> -->
-                    </div>
-                  </form>
-              
-                    <form action="/filterbyCompleted" id="EmployeeFormID" class="form-horizontal" method="POST"> 
-                      <div class="form-row align-items-center">
-                          <button type="submit" class="btn btn-lg btn-outline-success">COMPLETED</button>
-                      </div>
-                    </form>
-              
-                      <form action="/filterbyOverdue" id="EmployeeFormID" class="form-horizontal" method="POST"> 
-                        <div class="form-row align-items-center">
-                            <button type="submit" class="btn btn-lg btn-outline-danger">OVERDUE</button>
-                        </div>
-                      </form>
-                  
-              <!-- <form action="/filterbyDate" id="EmployeeFormID" class="form-horizontal" method="POST"  role="form">
-                 
-             <div class="col-md-12">
-                
-                   
-                     <div class="col-md-12">
-                        <button type="submit" class=" btn btn-lg btn-outline-primary" name="Today" placeholder="Filter" value="Today">
-                          </button>
-                    </div>
-             </div>
-      </form> -->
-           </div> 
-
-
-
-  
-            <div class="row">
-
-              <!-- <div class="col-md-12">
-                <div class="progress" style="height: 130%;">
-                 <div class="progress-bar bg-primary "role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">Open</div>
-                 <div class="progress-bar bg-success" role="progressbar" style="width: 30%" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100">Completed</div>
-                 <div class="progress-bar bg-danger" role="progressbar" style="width: 40%" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100">Overdue</div>
-               </div>
-               </div>
-
-               <br> -->
-       <div class="col-md-7" id="archive2ID">
-        <div class="ui main text container">
-          <div class="ui top attached segment" style="width: 80%;">
-              <div class="ui divided items">
-                  <% if(tasks.length>0) { %>
-                      <% for(let i=tasks.length-1;i>=0;i--){ %>
-                      <% var task=tasks[i]; %>
-                      <div class="item">
-                          <div class="content">
-                      
-                              <div class="header">
-                                  <p>Task: <%- task.description %></p> 
-                              </div>
-                                  <div class="description">
-                                      <p>Assigned To: <%- task.assignedto %></p>
-                                </div>
-                              <div class="description">
-                                  <span>Deadline<%= task.deadline%></span>
-                              </div>
-                              <div class="extra">
-                                  <a class="ui floated basic violet button" href="/tasks/<%= task._id %> ">
-                                      Read More
-                                      <i class="right chevron icon"></i>
-                                  </a>
-                              </div>
-                          </div>
-                      </div>
-                      <%}} else {%>
-                      <h2>No Tasks Found</h2>
-                      <%}%>        
-              </div>
-          </div>
-        </div>
-        
-              </div>
 <!-- ------------------------------------------PIE CHART----------------------------------- -->
-              <div class="col-md-5" style="margin-left: 10%;">
+
+<div class="row">
+              <div class="col-md-3" style="margin-top: 5%;">
 
                 <div class="pieID--operations pie-chart--wrapper">
-                  
-                  <% if(tasks.length!=0){ %>
-                  <h2>Total Taks:<%= tasks.length %></h2>
+                  <h2>Tasks Status</h2>
                   <div class="pie-chart">
-                
+                    
                     <div class="pie-chart__pie"></div>
                     <ul class="pie-chart__legend">
+                      <li><em>Today</em><span><%= tasks.length %></span></li>
+                      <% console.log("tasks.length"); %>
+                      <% console.log(tasks.length); %>
+                      <li><em>Open</em><span>1</span></li>
                       <% var closedCount=0; %>
-                      <% for(let i=tasks.length-1;i>=0;i--){ %>
-                      <% var task=tasks[i]; %>
-                        <% if(task.status=="Closed"){ %>
-                        <%  closedCount++;}} %>
+                    <% for(let i=tasks.length-1;i>=0;i--){ %>
+                    <% var task=tasks[i]; %>
+                      <% if(task.status=="Closed"){ %>
+                      <!-- <%  console.log(task.description); %>
+                      <%  console.log(task.status); %>
+                      <%  console.log(closedCount); %> -->
+                      <%  closedCount++;}} %>
+                      <!-- <%  console.log("closedCount"); %>
+                      <%  console.log(closedCount); %> -->
                       <li><em>Completed</em><span><%=closedCount%></span></li>
-                      <li><em>To do</em><span><%= tasks.length - closedCount%></span></li>
-                     
+                      <li><em>Overdue</em><span>1</span></li>
                     </ul>
                   </div>
-                 <% } %>
                 </div>
 
                 </div>
 
+                    <div class="col-md-3" style="margin-top:5%">
+                        <div class="pieID--categories pie-chart--wrapper">
+                            <h2>Criticality</h2>
+                            <div class="pie-chart">
+                              <div class="pie-chart__pie"></div>
+                              <ul class="pie-chart__legend">
+                                <li><em>Critial</em><span>768</span></li>
+                                <li><em>High</em><span>232</span></li>
+                                <li><em>Medium</em><span>232</span></li>
+                                <li><em>Low</em><span>232</span></li>
+                              </ul>
+                            </div>
+                          </div>
+                           </div>
+                           <div class="col-md-3" style="margin-top:5%">
+                            <div class="pieID--micro-skills pie-chart--wrapper">
+                                <h2>Progress</h2>
+                                <div class="pie-chart">
+                                  <div class="pie-chart__pie"></div>
+                                  <ul class="pie-chart__legend">
+                                    <li><em>Completed</em><span>642</span></li>
+                                    <li><em>To do</em><span>358</span></li>
+                                  </ul>
+                                </div>
+                              </div>
+                         </div>
+                         <div class="col-md-3">
+                     
+                        </div>
 
 
 
